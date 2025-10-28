@@ -1,7 +1,12 @@
-{
-  "id": "clock",
-  "name": "Clock App",
-  "version": "1.0",
-  "entry": "main.lua",
-  "description": "A simple digital clock with clean UI.",
-}
+[
+  {
+    "id": "test_app",
+    "name": "Test App",
+    "author": "Covrigel",
+    "shortDesc": "A short description",
+    "fullDesc": "This is the full description of Test App",
+    "entry": "main.lua",
+    "version": "0.1",
+    "url": "https://raw.githubusercontent.com/novolabs-robotics/app-centre/main/apps/test_app/"
+  }
+]
