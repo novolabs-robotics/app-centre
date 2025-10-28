@@ -1,0 +1,7 @@
+{
+  "id": "clock",
+  "name": "Clock App",
+  "version": "1.0",
+  "entry": "main.lua",
+  "description": "A simple digital clock with clean UI.",
+}
