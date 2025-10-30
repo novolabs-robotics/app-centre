@@ -13,7 +13,7 @@ lv_obj_set_style_radius(panel, 10, LV_PART_MAIN)
 -- Add a label on the panel
 local label = lv_label_create(panel)
 lv_label_set_text(label, "Hello LVGL Lua!")
-lv_obj_center(label)
+lv_obj_align(label, LV_ALIGN_CENTER, 0, 0)
 
 -- Add a button
 local btn = lv_btn_create(panel)
@@ -25,7 +25,7 @@ lv_obj_set_style_radius(btn, 5, LV_PART_MAIN)
 -- Add a label on the button
 local btn_label = lv_label_create(btn)
 lv_label_set_text(btn_label, "Click Me")
-lv_obj_center(btn_label)
+lv_obj_align(btn_label, LV_ALIGN_CENTER, 0, 0)
 
 -- Optional: add a simple horizontal animation for the panel
 local anim = lv_anim_t()
