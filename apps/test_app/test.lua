@@ -1,6 +1,8 @@
 -- test.lua
 -- Create a panel (container)
-local panel = lv_obj_create(lv_scr_act())
+local scr = lv_scr_act()
+
+local panel = lv_obj_create(scr)
 lv_obj_set_size(panel, 200, 150)
 lv_obj_set_align(panel, lv.ALIGN_CENTER)  -- center on screen
 lv_obj_set_style_bg_color(panel, lv.color_hex(0x3498db), lv.PART_MAIN) -- blue background
