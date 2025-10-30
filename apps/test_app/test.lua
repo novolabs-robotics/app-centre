@@ -28,8 +28,7 @@ lv_label_set_text(btn_label, "Click Me")
 lv_obj_set_align(btn_label, LV_ALIGN_CENTER)
 
 -- Optional: add a simple horizontal animation for the panel
-local anim = lv_anim_t()
-lv_anim_init(anim)
+local anim = lv_anim_create()
 lv_anim_set_var(anim, panel)
 lv_anim_set_exec_cb(anim, function(obj, v)
     lv_obj_set_x(obj, v)
