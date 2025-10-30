@@ -3,6 +3,13 @@
 -- Get the active screen
 local scr = lv_scr_act()
 
+function lv_color_hex(hex)
+    local r = (hex >> 16) & 0xFF
+    local g = (hex >> 8) & 0xFF
+    local b = hex & 0xFF
+    return r, g, b
+end
+
 -- Create a panel (generic object)
 local panel = lv_obj_create(scr)
 lv_obj_set_size(panel, 200, 120)
