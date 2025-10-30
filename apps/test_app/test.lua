@@ -1,1 +1,1 @@
-create_label("Hello World")
+lv_label_create("Hello World")
