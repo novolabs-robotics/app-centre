@@ -47,6 +47,22 @@ lv_obj_set_size(fowardBtn, 50, 50)
 lv_obj_set_style_bg_color(fowardBtn, lv_color_hex(0x202020), LV_PART_MAIN)
 lv_obj_set_style_radius(fowardBtn, 100, LV_PART_MAIN)
 
+local songPlayTime = lv_label_create(backwardBtn)
+lv_label_set_text(songPlayTime, "Backward")
+lv_obj_set_align(songPlayTime, LV_ALIGN_CENTER)
+
+local songPlayTime = lv_label_create(playBtn)
+lv_label_set_text(songPlayTime, "Play")
+lv_obj_set_align(songPlayTime, LV_ALIGN_CENTER)
+
+local songPlayTime = lv_label_create(pauseBtn)
+lv_label_set_text(songPlayTime, "Pause")
+lv_obj_set_align(songPlayTime, LV_ALIGN_CENTER)
+
+local songPlayTime = lv_label_create(fowardBtn)
+lv_label_set_text(songPlayTime, "Foward")
+lv_obj_set_align(songPlayTime, LV_ALIGN_CENTER)
+
 audio.start()
 audio.setVolume(15)
 audio.play("1.mp3")
