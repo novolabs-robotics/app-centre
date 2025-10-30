@@ -12,6 +12,7 @@ lv_obj_set_pos(songLabel, 0, -120)
 
 local songPlayTime = lv_label_create(scr)
 lv_label_set_text(songPlayTime, "00:00")
+lv_obj_set_style_text_color(panel, lv_color_hex(0x808080), LV_PART_MAIN)
 lv_obj_set_align(songPlayTime, LV_ALIGN_BOTTOM_LEFT)
 lv_obj_set_pos(songPlayTime, 15, -100)
 
