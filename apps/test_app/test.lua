@@ -5,11 +5,14 @@ local scr = lv_scr_act()
 
 -- Create a panel (generic object)
 local panel = lv_obj_create(scr)
-lv_obj_set_size(panel, 200, 120)
+lv_obj_set_size(panel, 200, 200)
 lv_obj_set_align(panel, LV_ALIGN_CENTER)
 lv_obj_set_style_bg_color(panel, lv_color_hex(0x101010), LV_PART_MAIN)
 lv_obj_set_style_border_color(panel, lv_color_hex(0x202020), LV_PART_MAIN)
 lv_obj_set_style_radius(panel, 20, LV_PART_MAIN)
+lv_obj_clear_flag(panel, LV_OBJ_FLAG_SCROLLABLE)
+--lv_obj_set_flex_flow(panel, LV_FLEX_FLOW_ROW)
+--lv_obj_set_flex_align(panel, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER)
 
 -- Add a label on the panel
 local label = lv_label_create(panel)
