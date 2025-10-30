@@ -7,8 +7,9 @@ local scr = lv_scr_act()
 local panel = lv_obj_create(scr)
 lv_obj_set_size(panel, 200, 120)
 lv_obj_set_align(panel, LV_ALIGN_CENTER)
-lv_obj_set_style_bg_color(panel, lv_color_hex(52, 152, 219), LV_PART_MAIN)
-lv_obj_set_style_radius(panel, 10, LV_PART_MAIN)
+lv_obj_set_style_bg_color(panel, lv_color_hex(0x101010), LV_PART_MAIN)
+lv_obj_set_style_border_color(panel, lv_color_hex(0x202020), LV_PART_MAIN)
+lv_obj_set_style_radius(panel, 100, LV_PART_MAIN)
 
 -- Add a label on the panel
 local label = lv_label_create(panel)
@@ -17,9 +18,10 @@ lv_obj_set_align(label, LV_ALIGN_CENTER)
 
 -- Add a button
 local btn = lv_btn_create(panel)
-lv_obj_set_size(btn, 80, 40)
+lv_obj_set_size(btn, 80, 50)
 lv_obj_set_align(btn, LV_ALIGN_BOTTOM_MID)
-lv_obj_set_style_bg_color(btn, lv_color_hex(231, 76, 60), LV_PART_MAIN)
+lv_obj_set_style_bg_color(btn, lv_color_hex(0x202020), LV_PART_MAIN)
+lv_obj_set_style_radius(btn, 100, LV_PART_MAIN)
 
 -- Add a label on the button
 local btn_label = lv_label_create(btn)
