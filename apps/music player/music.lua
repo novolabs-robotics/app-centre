@@ -1,2 +1,0 @@
--- Music Player
--- Example demo created by novolabs
