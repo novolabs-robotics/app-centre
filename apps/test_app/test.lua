@@ -9,12 +9,13 @@ lv_obj_set_size(panel, 200, 120)
 lv_obj_set_align(panel, LV_ALIGN_CENTER)
 lv_obj_set_style_bg_color(panel, lv_color_hex(0x101010), LV_PART_MAIN)
 lv_obj_set_style_border_color(panel, lv_color_hex(0x202020), LV_PART_MAIN)
-lv_obj_set_style_radius(panel, 100, LV_PART_MAIN)
+lv_obj_set_style_radius(panel, 20, LV_PART_MAIN)
 
 -- Add a label on the panel
 local label = lv_label_create(panel)
 lv_label_set_text(label, "Hello LVGL Lua!")
-lv_obj_set_align(label, LV_ALIGN_CENTER)
+lv_obj_set_align(label, LV_ALIGN_TOP_MID)
+lv_obj_set_text_font(label, "font_montserrat_18")
 
 -- Add a button
 local btn = lv_btn_create(panel)
