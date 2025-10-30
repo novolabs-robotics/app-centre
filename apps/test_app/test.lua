@@ -19,7 +19,6 @@ local label = lv_label_create(panel)
 lv_label_set_text(label, "Hello LVGL Lua!")
 lv_obj_set_align(label, LV_ALIGN_TOP_MID)
 lv_obj_set_text_font(label, "font_montserrat_18")
-lv_obj_set_style_text_color(label, lv_color_hex(0x808080), LV_PART_MAIN)
 
 -- Add a button
 local btn = lv_btn_create(panel)
@@ -32,3 +31,4 @@ lv_obj_set_style_radius(btn, 100, LV_PART_MAIN)
 local btn_label = lv_label_create(btn)
 lv_label_set_text(btn_label, "Click Me")
 lv_obj_set_align(btn_label, LV_ALIGN_CENTER)
+lv_obj_set_style_text_color(btn_label, lv_color_hex(0x808080), LV_PART_MAIN)
