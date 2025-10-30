@@ -1,46 +1,40 @@
 -- test.lua
--- Create a panel (container)
+
+-- Get the active screen
 local scr = lv_scr_act()
 
+-- Create a panel (generic object)
 local panel = lv_obj_create(scr)
-lv_obj_set_size(panel, 200, 150)
-lv_obj_set_align(panel, lv.ALIGN_CENTER)  -- center on screen
-lv_obj_set_style_bg_color(panel, lv.color_hex(0x3498db), lv.PART_MAIN) -- blue background
-lv_obj_set_style_radius(panel, 15, lv.PART_MAIN)  -- rounded corners
+lv_obj_set_size(panel, 200, 120)
+lv_obj_set_align(panel, LV_ALIGN_CENTER)
+lv_obj_set_style_bg_color(panel, lv_color_hex(0x3498db), LV_PART_MAIN)
+lv_obj_set_style_radius(panel, 10, LV_PART_MAIN)
 
--- Add a label
+-- Add a label on the panel
 local label = lv_label_create(panel)
-lv_label_set_text(label, "Hello Lua + LVGL!")
-lv_obj_set_align(label, lv.ALIGN_TOP_MID)
-lv_obj_set_style_text_color(label, lv.color_hex(0xffffff), lv.PART_MAIN)
+lv_label_set_text(label, "Hello LVGL Lua!")
+lv_obj_center(label)
 
 -- Add a button
 local btn = lv_btn_create(panel)
-lv_obj_set_size(btn, 100, 40)
-lv_obj_set_align(btn, lv.ALIGN_BOTTOM_MID)
+lv_obj_set_size(btn, 80, 40)
+lv_obj_align(btn, LV_ALIGN_BOTTOM_MID)
+lv_obj_set_style_bg_color(btn, lv_color_hex(0xe74c3c), LV_PART_MAIN)
 
+-- Add a label on the button
 local btn_label = lv_label_create(btn)
 lv_label_set_text(btn_label, "Click Me")
-lv_obj_set_style_text_color(btn_label, lv.color_hex(0x000000), lv.PART_MAIN)
+lv_obj_center(btn_label)
 
--- Button event
-lv_obj_add_event_cb(btn, function()
-    lv_label_set_text(label, "Button Pressed!")
-end, lv.EVENT_CLICKED)
-
--- Add an image
--- Make sure you have a binary image loaded as lv_img_dsc_t
--- local img = lv_img_create(panel)
--- lv_img_set_src(img, my_image_dsc)
--- lv_obj_set_align(img, lv.ALIGN_CENTER)
-
--- Animation example: fade in the panel
+-- Optional: add a simple animation (move the panel horizontally)
 local anim = lv_anim_t()
 lv_anim_init(anim)
 lv_anim_set_var(anim, panel)
-lv_anim_set_values(anim, 0, 255)   -- opacity from 0 to 255
-lv_anim_set_time(anim, 1000)       -- 1 second
-lv_anim_set_exec_cb(anim, function(obj, val)
-    lv_obj_set_style_opa(obj, val, lv.PART_MAIN)
+lv_anim_set_exec_cb(anim, function(obj, v)
+    lv_obj_set_x(obj, v)
 end)
+lv_anim_set_values(anim, 50, 150)
+lv_anim_set_time(anim, 2000)
+lv_anim_set_playback_time(anim, 2000)
+lv_anim_set_repeat_count(anim, LV_ANIM_REPEAT_INFINITE)
 lv_anim_start(anim)
