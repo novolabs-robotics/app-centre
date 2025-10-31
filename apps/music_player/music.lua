@@ -7,6 +7,7 @@ local scr = lv_scr_act()
 -- Start audio
 audio_start()
 audio_build_playlist("/music")
+audio_set_volume(30)
 
 -- Song Label (Example: Scarlet Fire.mp3)
 local songLabel = lv_label_create(scr)
