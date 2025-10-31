@@ -99,11 +99,6 @@ local function updateUI()
         lv_label_set_text(songLabel, currentSong)
     end
 
-    local sec = math.floor(audio_get_position() / 1000)
-    local min = math.floor(sec / 60)
-    sec = sec % 60
-    lv_label_set_text(songPlayTime, string.format("%02d:%02d", min, sec))
-
     local coverPath = audio_get_cover()
     if coverPath then
         lv_img_set_src(coverImage, coverPath)
@@ -112,3 +107,20 @@ end
 
 -- Create LVGL timer to call updateUI every 1 second
 lv_timer_create(updateUI, 1000, nil)
+
+local function formatTime(ms)
+    local sec = math.floor(ms / 1000)
+    local min = math.floor(sec / 60)
+    sec = sec % 60
+    return string.format("%d:%02d", min, sec)
+end
+
+local function updatePlayTime()
+    if audio_is_playing() then
+        local pos = audio_get_position()
+        local dur = audio_get_duration()
+        lv_label_set_text(songPlayTime, formatTime(pos) .. " / " .. formatTime(dur))
+    end
+end
+
+lv_timer_create(updatePlayTime, 1000, nil)
