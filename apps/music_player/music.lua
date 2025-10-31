@@ -4,7 +4,7 @@
 local scr = lv_scr_act()
 
 local songLabel = lv_label_create(scr)
-lv_obj_set_size(panel, 290, 21)
+lv_obj_set_size(songLabel, 290, 21)
 lv_label_set_text(songLabel, "Loading song...")
 lv_obj_set_align(songLabel, LV_ALIGN_BOTTOM_MID)
 lv_obj_set_text_font(songLabel, "font_montserrat_18")
@@ -63,6 +63,6 @@ local fowardBtn_label = lv_label_create(fowardBtn)
 lv_label_set_text(fowardBtn_label, "Foward")
 lv_obj_set_align(fowardBtn_label, LV_ALIGN_CENTER)
 
---audio.start()
---audio.setVolume(15)
---audio.play("1.mp3")
+audio.start()
+audio.setVolume(15)
+audio.play("1.mp3")
