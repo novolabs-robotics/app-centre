@@ -1,21 +1,29 @@
 -- Music Player
 -- Created by novolabs
 
+-- Define screen (AppPanel)
 local scr = lv_scr_act()
 
+-- Start audio
+audio_start()
+audio_build_playlist("/music")
+
+-- Song Label (Example: Scarlet Fire.mp3)
 local songLabel = lv_label_create(scr)
 lv_obj_set_size(songLabel, 290, 21)
-lv_label_set_text(songLabel, "Loading song...")
+lv_label_set_text(songLabel, "Song label")
 lv_obj_set_align(songLabel, LV_ALIGN_BOTTOM_MID)
 lv_obj_set_text_font(songLabel, "font_montserrat_18")
 lv_obj_set_pos(songLabel, 0, -120)
 
+-- Song playtime (Exemple: 00:35)
 local songPlayTime = lv_label_create(scr)
 lv_label_set_text(songPlayTime, "00:00")
 lv_obj_set_style_text_color(songPlayTime, lv_color_hex(0x808080), LV_PART_MAIN)
 lv_obj_set_align(songPlayTime, LV_ALIGN_BOTTOM_LEFT)
 lv_obj_set_pos(songPlayTime, 15, -100)
 
+-- Media Panel
 local panel = lv_obj_create(scr)
 lv_obj_set_size(panel, 290, 60)
 lv_obj_set_align(panel, LV_ALIGN_BOTTOM_MID)
@@ -27,6 +35,7 @@ lv_obj_set_flex_flow(panel, LV_FLEX_FLOW_ROW)
 lv_obj_set_flex_align(panel, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER)
 lv_obj_set_style_radius(panel, 100, LV_PART_MAIN)
 
+-- Media Panel Buttons
 local backwardBtn = lv_btn_create(panel)
 lv_obj_set_size(backwardBtn, 50, 50)
 lv_obj_set_style_bg_color(backwardBtn, lv_color_hex(0x202020), LV_PART_MAIN)
@@ -63,6 +72,19 @@ local fowardBtn_label = lv_label_create(fowardBtn)
 lv_label_set_text(fowardBtn_label, "Foward")
 lv_obj_set_align(fowardBtn_label, LV_ALIGN_CENTER)
 
-audio.start()
-audio.setVolume(15)
-audio.play("1.mp3")
+-- Button Events
+lua_lv_obj_add_event_cb(playBtn, function()
+    audio_resume()
+end, LV_EVENT_CLICKED)
+
+lua_lv_obj_add_event_cb(pauseBtn, function()
+    audio_pause()
+end, LV_EVENT_CLICKED)
+
+lua_lv_obj_add_event_cb(fowardBtn, function()
+    audio_next()
+end, LV_EVENT_CLICKED)
+
+lua_lv_obj_add_event_cb(backwardBtn, function()
+    audio_prev()
+end, LV_EVENT_CLICKED)
