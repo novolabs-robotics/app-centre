@@ -17,7 +17,7 @@ lv_obj_set_pos(coverImage, 0, 10)
 -- Song Label
 local songLabel = lv_label_create(scr)
 lv_obj_set_size(songLabel, 290, 21)
-lv_obj_set_text(songLabel, "Song label")
+lv_label_set_text(songLabel, "Song label")
 lv_obj_set_align(songLabel, LV_ALIGN_TOP_MID)
 lv_obj_set_text_font(songLabel, "font_montserrat_18")
 lv_obj_set_pos(songLabel, 0, 140)
