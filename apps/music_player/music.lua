@@ -8,11 +8,11 @@ audio_start()
 audio_build_playlist("/music")
 audio_set_volume(30)
 
--- Cover Image (LVGL image object)
+-- Cover Image
 local coverImage = lv_img_create(scr)
 lv_obj_set_size(coverImage, 120, 120)
-lv_obj_set_align(coverImage, LV_ALIGN_TOP_MID)
-lv_obj_set_pos(coverImage, 0, 10)
+lv_obj_set_align(coverImage, LV_ALIGN_BOTTOM_MID)
+lv_obj_set_pos(coverImage, 0, -135)
 
 -- Song Label
 local songLabel = lv_label_create(scr)
@@ -20,14 +20,14 @@ lv_obj_set_size(songLabel, 290, 21)
 lv_label_set_text(songLabel, "Song label")
 lv_obj_set_align(songLabel, LV_ALIGN_TOP_MID)
 lv_obj_set_text_font(songLabel, "font_montserrat_18")
-lv_obj_set_pos(songLabel, 0, 140)
+lv_obj_set_pos(songLabel, 0, -120)
 
 -- Song playtime
 local songPlayTime = lv_label_create(scr)
 lv_label_set_text(songPlayTime, "00:00")
 lv_obj_set_style_text_color(songPlayTime, lv_color_hex(0x808080), LV_PART_MAIN)
 lv_obj_set_align(songPlayTime, LV_ALIGN_TOP_LEFT)
-lv_obj_set_pos(songPlayTime, 15, 170)
+lv_obj_set_pos(songPlayTime, 15, -100)
 
 -- Media Panel
 local panel = lv_obj_create(scr)
