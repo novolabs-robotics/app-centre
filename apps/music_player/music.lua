@@ -18,7 +18,7 @@ lv_obj_set_pos(coverImage, 0, -135)
 local songLabel = lv_label_create(scr)
 lv_obj_set_size(songLabel, 290, 21)
 lv_label_set_text(songLabel, "Song label")
-lv_obj_set_align(songLabel, LV_ALIGN_TOP_MID)
+lv_obj_set_align(songLabel, LV_ALIGN_BOTTOM_MID)
 lv_obj_set_text_font(songLabel, "font_montserrat_18")
 lv_obj_set_pos(songLabel, 0, -120)
 
@@ -26,7 +26,7 @@ lv_obj_set_pos(songLabel, 0, -120)
 local songPlayTime = lv_label_create(scr)
 lv_label_set_text(songPlayTime, "00:00")
 lv_obj_set_style_text_color(songPlayTime, lv_color_hex(0x808080), LV_PART_MAIN)
-lv_obj_set_align(songPlayTime, LV_ALIGN_TOP_LEFT)
+lv_obj_set_align(songPlayTime, LV_ALIGN_BOTTOM_LEFT)
 lv_obj_set_pos(songPlayTime, 15, -100)
 
 -- Media Panel
