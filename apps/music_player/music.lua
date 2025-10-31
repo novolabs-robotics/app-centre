@@ -109,8 +109,8 @@ end
 lv_timer_create(updateUI, 1000, nil)
 
 local function formatTime(ms)
-    local sec = math.floor(ms / 1000)
-    local min = math.floor(sec / 60)
+    local sec = ms // 1000       -- integer division
+    local min = sec // 60
     sec = sec % 60
     return string.format("%d:%02d", min, sec)
 end
