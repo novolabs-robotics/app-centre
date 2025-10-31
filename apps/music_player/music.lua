@@ -72,7 +72,7 @@ createBtnLabel(pauseBtn, "Pause")
 createBtnLabel(fowardBtn, "Foward")
 
 -- Button events
-lua_lv_obj_add_event_cb(playBtn, function()
+lv_obj_add_event_cb(playBtn, function()
     if not audio_is_playing() then
         audio_play_current()
     else
@@ -80,15 +80,15 @@ lua_lv_obj_add_event_cb(playBtn, function()
     end
 end, LV_EVENT_CLICKED)
 
-lua_lv_obj_add_event_cb(pauseBtn, function()
+lv_obj_add_event_cb(pauseBtn, function()
     audio_pause()
 end, LV_EVENT_CLICKED)
 
-lua_lv_obj_add_event_cb(fowardBtn, function()
+lv_obj_add_event_cb(fowardBtn, function()
     audio_next()
 end, LV_EVENT_CLICKED)
 
-lua_lv_obj_add_event_cb(backwardBtn, function()
+lv_obj_add_event_cb(backwardBtn, function()
     audio_prev()
 end, LV_EVENT_CLICKED)
 
