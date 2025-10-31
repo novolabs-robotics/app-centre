@@ -74,7 +74,9 @@ createBtnLabel(fowardBtn, "Foward")
 -- Button events
 lv_obj_add_event_cb(playBtn, function()
     if not audio_is_playing() then
-        audio_play_current()
+        audio_play(audio_get_playlist()[1]) -- play first song if nothing playing
+    end
+end, LV_EVENT_CLICKED)
     else
         audio_resume()
     end
