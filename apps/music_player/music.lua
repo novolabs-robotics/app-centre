@@ -101,7 +101,7 @@ local function updateUI()
 
     local coverPath = audio_get_cover()
     if coverPath then
-        lv_img_set_src(coverImage, "S:" .. coverPath)
+        lv_img_set_src(img, "S:/music/covers/Scarlet Fire.png");
     end
 end
 
