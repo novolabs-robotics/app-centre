@@ -101,7 +101,13 @@ local function updateUI()
 
     local coverPath = audio_get_cover()
     if coverPath then
-        lv_img_set_src(img, "S:/music/covers/Scarlet Fire.png");
+        -- Ensure leading slash exists
+        if not string.find(coverPath, "^/") then
+            coverPath = "/" .. coverPath
+        end
+        local fullPath = "S:" .. coverPath
+        print("Trying to load cover:", fullPath)
+        lv_img_set_src(coverImage, fullPath)
     end
 end
 
