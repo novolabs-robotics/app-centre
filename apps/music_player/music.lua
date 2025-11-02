@@ -101,7 +101,7 @@ local function updateUI()
 
     local coverPath = audio_get_cover()
     if coverPath then
-        lv_img_set_src(coverImage, coverPath)
+        lv_img_set_src(coverImage, "S:" .. coverPath)
     end
 end
 
