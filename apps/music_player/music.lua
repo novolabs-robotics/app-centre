@@ -10,7 +10,7 @@ audio_set_volume(30)
 
 -- Cover Image
 local coverImage = lv_img_create(scr)
-lv_obj_set_size(coverImage, 120, 120)
+lv_obj_set_size(coverImage, LV_SIZE_CONTENT, LV_SIZE_CONTENT)
 lv_obj_set_align(coverImage, LV_ALIGN_BOTTOM_MID)
 lv_obj_set_pos(coverImage, 0, -135)
 
