@@ -111,15 +111,11 @@ function updateUI()
     -- Load cover image once per play
     local coverPath = audio_get_cover()
     if coverPath and not g_cover_drawn then
-        -- Ensure leading slash exists
         if not string.find(coverPath, "^/") then
             coverPath = "/" .. coverPath
         end
-        local fullPath = "S:" .. coverPath
-        print("Loading cover:", fullPath)
-
-        -- Load image into canvas
-        local success = canvas_load_image(coverCanvas, fullPath)
+        print("Loading cover:", coverPath)
+        local success = canvas_load_image(coverCanvas, coverPath)
         if success then
             print("Cover drawn successfully!")
             g_cover_drawn = true
