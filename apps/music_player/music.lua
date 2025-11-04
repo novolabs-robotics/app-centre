@@ -96,12 +96,12 @@ lv_obj_add_event_cb(backwardBtn, function()
 end, LV_EVENT_CLICKED)
 
 -- Update function (song label, time, cover)
-local function canvas_reset()
+function canvas_reset()
     g_cover_drawn = false  -- global Lua variable for tracking
 end
 
 -- Update UI function, called on song change or play
-local function updateUI()
+function updateUI()
     -- Update song label
     local currentSong = audio_get_current()
     if currentSong then
@@ -128,6 +128,7 @@ local function updateUI()
         end
     end
 end
+
 local function formatTime(ms)
     local sec = ms // 1000       -- integer division
     local min = sec // 60
