@@ -6,24 +6,30 @@ local scr = lv_scr_act()
 -- Start audio system and build playlist
 audio_start()
 audio_build_playlist("/music")
-audio_set_volume(30)
+audio_set_volume(21)
 
 -- Cover Image
-local coverImage = lv_img_create(scr)
-lv_obj_set_align(coverImage, LV_ALIGN_BOTTOM_MID)
-lv_obj_set_pos(coverImage, 0, -135)
+local coverCanvas = lv_canvas_create(scr)
+local CANVAS_W, CANVAS_H = 135, 135  -- cover display area
+local coverBuffer = lvgl.allocate_buf(CANVAS_W, CANVAS_H, lvgl.COLOR_FORMAT_RGB565)
+
+lv_canvas_set_buffer(coverCanvas, coverBuffer, CANVAS_W, CANVAS_H, LV_IMG_CF_TRUE_COLOR)
+lv_obj_set_align(coverCanvas, LV_ALIGN_BOTTOM_MID)
+lv_obj_set_pos(coverCanvas, 0, -135)
+lv_obj_clear_flag(coverCanvas, lv.OBJ_FLAG_SCROLLABLE)
+lv_canvas_fill_bg(coverCanvas, lv_color_hex(0x000000), LV_OPA_COVER)
 
 -- Song Label
 local songLabel = lv_label_create(scr)
 lv_obj_set_size(songLabel, 290, 21)
-lv_label_set_text(songLabel, "Song label")
+lv_label_set_text(songLabel, "No song playing")
 lv_obj_set_align(songLabel, LV_ALIGN_BOTTOM_MID)
 lv_obj_set_text_font(songLabel, "font_montserrat_18")
 lv_obj_set_pos(songLabel, 0, -120)
 
 -- Song playtime
 local songPlayTime = lv_label_create(scr)
-lv_label_set_text(songPlayTime, "00:00")
+lv_label_set_text(songPlayTime, "00:00 / 00:00")
 lv_obj_set_style_text_color(songPlayTime, lv_color_hex(0x808080), LV_PART_MAIN)
 lv_obj_set_align(songPlayTime, LV_ALIGN_BOTTOM_LEFT)
 lv_obj_set_pos(songPlayTime, 15, -100)
@@ -72,6 +78,7 @@ createBtnLabel(fowardBtn, "Foward")
 
 -- Button events
 lv_obj_add_event_cb(playBtn, function()
+    updateUI()
     if not audio_is_playing() then
         audio_play(audio_get_playlist()[1]) -- play first song if nothing playing
     else
@@ -91,6 +98,23 @@ lv_obj_add_event_cb(backwardBtn, function()
     audio_prev()
 end, LV_EVENT_CLICKED)
 
+-- Track the last cover shown to avoid reloading the same one
+local lastCoverPath = nil
+
+-- Function to draw a decoded cover image to the canvas
+local function drawCoverToCanvas(path)
+    print("Decoding cover:", path)
+    local imageData, width, height = audio_decode_cover_rgb565(path)
+    if imageData then
+        lv_canvas_fill_bg(coverCanvas, lv.color_hex(0x000000), lv.OPA_COVER)
+        lv_canvas_copy_buf(coverCanvas, imageData, 0, 0, math.min(width, CANVAS_W), math.min(height, CANVAS_H))
+        print("Cover drawn successfully")
+    else
+        print("Failed to decode cover:", path)
+        lv_canvas_fill_bg(coverCanvas, lv.color_hex(0x303030), lv.OPA_COVER)
+    end
+end
+
 -- Update function (song label, time, cover)
 local function updateUI()
     local currentSong = audio_get_current()
@@ -99,20 +123,15 @@ local function updateUI()
     end
 
     local coverPath = audio_get_cover()
-    if coverPath then
-        -- Ensure leading slash exists
+    if coverPath and coverPath ~= lastCoverPath then
         if not string.find(coverPath, "^/") then
             coverPath = "/" .. coverPath
         end
         local fullPath = "S:" .. coverPath
-        print("Trying to load cover:", fullPath)
-        lv_img_set_src(coverImage, fullPath)
-        lv_obj_set_size(coverImage, LV_SIZE_CONTENT, LV_SIZE_CONTENT)
+        drawCoverToCanvas(fullPath)
+        lastCoverPath = coverPath
     end
 end
-
--- Create LVGL timer to call updateUI every 1 second
-lv_timer_create(updateUI, 1000, nil)
 
 local function formatTime(ms)
     local sec = ms // 1000       -- integer division
