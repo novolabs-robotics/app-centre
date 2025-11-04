@@ -98,23 +98,6 @@ lv_obj_add_event_cb(backwardBtn, function()
     audio_prev()
 end, LV_EVENT_CLICKED)
 
--- Track the last cover shown to avoid reloading the same one
-local lastCoverPath = nil
-
--- Function to draw a decoded cover image to the canvas
-local function drawCoverToCanvas(path)
-    print("Decoding cover:", path)
-    local imageData, width, height = audio_decode_cover_rgb565(path)
-    if imageData then
-        lv_canvas_fill_bg(coverCanvas, lv.color_hex(0x000000), lv.OPA_COVER)
-        lv_canvas_copy_buf(coverCanvas, imageData, 0, 0, math.min(width, CANVAS_W), math.min(height, CANVAS_H))
-        print("Cover drawn successfully")
-    else
-        print("Failed to decode cover:", path)
-        lv_canvas_fill_bg(coverCanvas, lv.color_hex(0x303030), lv.OPA_COVER)
-    end
-end
-
 -- Update function (song label, time, cover)
 local function updateUI()
     local currentSong = audio_get_current()
@@ -123,13 +106,10 @@ local function updateUI()
     end
 
     local coverPath = audio_get_cover()
-    if coverPath and coverPath ~= lastCoverPath then
-        if not string.find(coverPath, "^/") then
-            coverPath = "/" .. coverPath
-        end
+    if coverPath then
         local fullPath = "S:" .. coverPath
-        drawCoverToCanvas(fullPath)
-        lastCoverPath = coverPath
+        print("Cover path:", fullPath)
+        canvas_load_image(coverCanvas, fullPath)
     end
 end
 
