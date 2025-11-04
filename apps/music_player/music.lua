@@ -10,10 +10,7 @@ audio_set_volume(21)
 
 -- Cover Image
 local coverCanvas = lv_canvas_create(scr)
-local CANVAS_W, CANVAS_H = 135, 135  -- cover display area
-local coverBuffer = lvgl.allocate_buf(CANVAS_W, CANVAS_H, lvgl.COLOR_FORMAT_RGB565)
-
-lv_canvas_set_buffer(coverCanvas, coverBuffer, CANVAS_W, CANVAS_H, LV_IMG_CF_TRUE_COLOR)
+lv_obj_set_size(coverCanvas, 135, 135)  -- or LV_SIZE_CONTENT if you prefer
 lv_obj_set_align(coverCanvas, LV_ALIGN_BOTTOM_MID)
 lv_obj_set_pos(coverCanvas, 0, -135)
 lv_obj_clear_flag(coverCanvas, lv.OBJ_FLAG_SCROLLABLE)
@@ -78,12 +75,13 @@ createBtnLabel(fowardBtn, "Foward")
 
 -- Button events
 lv_obj_add_event_cb(playBtn, function()
-    updateUI()
     if not audio_is_playing() then
         audio_play(audio_get_playlist()[1]) -- play first song if nothing playing
     else
         audio_resume()
     end
+    canvas_reset()
+    updateUI()
 end, LV_EVENT_CLICKED)
 
 lv_obj_add_event_cb(pauseBtn, function()
@@ -99,20 +97,38 @@ lv_obj_add_event_cb(backwardBtn, function()
 end, LV_EVENT_CLICKED)
 
 -- Update function (song label, time, cover)
+local function canvas_reset()
+    g_cover_drawn = false  -- global Lua variable for tracking
+end
+
+-- Update UI function, called on song change or play
 local function updateUI()
+    -- Update song label
     local currentSong = audio_get_current()
     if currentSong then
         lv_label_set_text(songLabel, currentSong)
     end
 
+    -- Load cover image once per play
     local coverPath = audio_get_cover()
-    if coverPath then
+    if coverPath and not g_cover_drawn then
+        -- Ensure leading slash exists
+        if not string.find(coverPath, "^/") then
+            coverPath = "/" .. coverPath
+        end
         local fullPath = "S:" .. coverPath
-        print("Cover path:", fullPath)
-        canvas_load_image(coverCanvas, fullPath)
+        print("Loading cover:", fullPath)
+
+        -- Load image into canvas
+        local success = canvas_load_image(coverCanvas, fullPath)
+        if success then
+            print("Cover drawn successfully!")
+            g_cover_drawn = true
+        else
+            print("Failed to draw cover")
+        end
     end
 end
-
 local function formatTime(ms)
     local sec = ms // 1000       -- integer division
     local min = sec // 60
