@@ -13,7 +13,7 @@ local coverCanvas = lv_canvas_create(scr)
 lv_obj_set_size(coverCanvas, 135, 135)  -- or LV_SIZE_CONTENT if you prefer
 lv_obj_set_align(coverCanvas, LV_ALIGN_BOTTOM_MID)
 lv_obj_set_pos(coverCanvas, 0, -135)
-lv_obj_clear_flag(coverCanvas, lv.OBJ_FLAG_SCROLLABLE)
+lv_obj_clear_flag(coverCanvas, LV_OBJ_FLAG_SCROLLABLE)
 lv_canvas_fill_bg(coverCanvas, lv_color_hex(0x000000), LV_OPA_COVER)
 
 -- Song Label
